@@ -1,0 +1,5 @@
+{
+	"token": "your-token-goes-here",
+	"clientId": "123456789012345678",
+	"guildId": "dev guild goes here"
+}
