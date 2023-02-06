@@ -1,11 +1,11 @@
 const { Client, Events, GatewayIntentBits, Collection } = require("discord.js");
-
 const { ArchipelagoClient, ItemsHandlingFlags } = require("archipelago.js");
 
 const fs = require("node:fs");
 const path = require("node:path");
 
 const { token, logChannel } = require("./config.json");
+const { JsonDB, Config } = require("node-json-db");
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
@@ -22,6 +22,8 @@ const APCredentials = {
   items_handling: ItemsHandlingFlags.REMOTE_ALL,
   tags: ["TextOnly"],
 };
+
+const db = new JsonDB(new Config("botDB", true, true, "/"));
 
 client.commands = new Collection();
 
@@ -93,4 +95,4 @@ client.on(Events.InteractionCreate, async (interaction) => {
   // console.log(interaction);
 });
 
-client.login(token);
+client.login(token).then(() => console.log("Connected"));
